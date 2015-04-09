@@ -4,11 +4,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    app.logger.debug('Entering index()')
     user = session.get('username', None)
     return render_template('my_app.html', user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    app.logger.debug('Entering login()')
     if request.method == 'POST':
         if request.form['username']:
             session['username'] = request.form['username']
@@ -19,6 +21,7 @@ def login():
 
 @app.route('/logout')
 def logout():
+    app.logger.debug('Entering logout()')
     session.pop('username', None)
     return redirect(url_for('index'))
 
