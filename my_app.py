@@ -19,6 +19,5 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
-app.secret_key = 'abcd1234'
-app.debug = True
+app.config.from_pyfile('config/my_app.cfg')
 app.run()
