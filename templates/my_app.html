@@ -1,5 +1,5 @@
-<!doctype html>
-<title>Hello from Flask</title>
+{% extends "layout.html" %}
+{% block body %}
 {% if user %}
   <h1>Hello {{ user }}!</h1>
   <a href="{{ url_for('logout') }}">log out</a>
@@ -7,3 +7,4 @@
   <h1>Hello World!</h1>
   <a href="{{ url_for('login') }}">log in</a>
 {% endif %}
+{% endblock %}

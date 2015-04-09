@@ -1,4 +1,4 @@
-from flask import Flask, session, redirect, url_for, escape, request, render_template
+from flask import Flask, session, redirect, url_for, escape, request, render_template, flash
 
 app = Flask(__name__)
 
@@ -10,8 +10,11 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        session['username'] = request.form['username']
-        return redirect(url_for('index'))
+        if request.form['username']:
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid user name!')
     return render_template('login.html')
 
 @app.route('/logout')
