@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul>
+  {% for row in list_photos %}
+    <li><a href="{{ row['photo_name'] }}">{{ row['photo_name']|safe }} </a>
+  {% else %}
+    <li><em>No photo in the database</em>
+  {% endfor %}
+  </ul>
+
+<a href="{{ url_for('index') }}">Home</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul>
+  {% for row in photo_dates %}
+    <li><a href="{{ url_for('list_photos_by_date', p_date=row['photo_date']) }}">{{ row['photo_date']|safe }} </a>
+  {% else %}
+    <li><em>No photo in the database</em>
+  {% endfor %}
+  </ul>
+
+<a href="{{ url_for('index') }}">Home</a>
+{% endblock %}

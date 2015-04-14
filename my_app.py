@@ -41,6 +41,20 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
+@app.route('/list_dates')
+def list_dates():
+    cur = g.db.execute('select distinct photo_date from tphoto order by photo_date')
+    photo_dates = [dict(photo_date=row[0]) for row in cur.fetchall()]
+    app.logger.debug(photo_dates[0]['photo_date'])
+    return render_template('list_dates.html', photo_dates=photo_dates)
+
+@app.route('/list_photos_by_date/<p_date>')
+def list_photos_by_date(p_date):
+    app.logger.debug('Query photos for: ' + p_date)
+    cur = g.db.execute('select photo_name from tphoto order by photo_name')
+    list_photos = [dict(photo_name=row[0]) for row in cur.fetchall()]
+    return render_template('list_photos.html', list_photos=list_photos)
+
 # Database functions
 
 # Connect to the database and return a db handle
