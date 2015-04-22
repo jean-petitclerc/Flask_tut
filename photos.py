@@ -1,5 +1,5 @@
 from flask import Flask, session, redirect, url_for, escape, request, render_template, flash, g
-from flask.ext.bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 from contextlib import closing
 import sqlite3
 
@@ -17,6 +17,15 @@ def teardown_request(exception):
     db = getattr(g, 'db', None)
     if db is not None:
         db.close()
+
+# Custom error pages
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'),404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'),500
 
 # The following functions are views
 @app.route('/')

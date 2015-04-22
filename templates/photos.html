@@ -1,11 +1,12 @@
-{% extends "layout.html" %}
-{% block body %}
-{% if user %}
-  <h1>Hello {{ user }}!</h1>
-  <a href="{{ url_for('logout') }}">log out</a>
-{% else %}
-  <h1>Hello World!</h1>
-  <a href="{{ url_for('login') }}">log in</a>
-{% endif %}
-<a href="{{ url_for('list_dates') }}">Liste Photos par Dates></a>
+{% extends "base.html" %}
+{% block content %}
+  {% if user %}
+    <h1>Hello {{ user }}!</h1>
+    <ul>
+      <li><a href="{{ url_for('list_dates') }}">Liste Photos par Dates</a></li>
+      <li>Autre listes non disponibles</li>
+    </ul>
+  {% else %}
+    <h1>Hello stranger! Please, login...</h1>
+  {% endif %}
 {% endblock %}

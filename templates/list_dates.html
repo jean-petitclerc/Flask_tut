@@ -1,5 +1,6 @@
-{% extends "layout.html" %}
-{% block body %}
+{% extends "base.html" %}
+{% block content %}
+  <h1>Liste des dates</h1>
   <ul>
   {% for row in photo_dates %}
     <li><a href="{{ url_for('list_photos_by_date', p_date=row['photo_date']) }}">{{ row['photo_date']|safe }} </a>
@@ -8,5 +9,4 @@
   {% endfor %}
   </ul>
 
-<a href="{{ url_for('index') }}">Home</a>
 {% endblock %}
