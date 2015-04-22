@@ -1,8 +1,10 @@
 from flask import Flask, session, redirect, url_for, escape, request, render_template, flash, g
+from flask.ext.bootstrap import Bootstrap
 from contextlib import closing
 import sqlite3
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
 # This creates the database connection for each request
 @app.before_request
@@ -21,7 +23,7 @@ def teardown_request(exception):
 def index():
     app.logger.debug('Entering index()')
     user = session.get('username', None)
-    return render_template('my_app.html', user=user)
+    return render_template('photos.html', user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -85,7 +87,7 @@ def db_validate_user(user_name, user_pass):
         return True    
 
 # Read the configurations
-app.config.from_pyfile('config/my_app.cfg')
+app.config.from_pyfile('config/photos.cfg')
 
 # Start the server for the application
 if __name__ == '__main__':
