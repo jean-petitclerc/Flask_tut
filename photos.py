@@ -1,9 +1,11 @@
 from flask import Flask, session, redirect, url_for, escape, request, render_template, flash, g
 from flask_bootstrap import Bootstrap
+from flask_script import Manager
 from contextlib import closing
 import sqlite3
 
 app = Flask(__name__)
+manager = Manager(app)
 bootstrap = Bootstrap(app)
 
 # This creates the database connection for each request
@@ -100,4 +102,4 @@ app.config.from_pyfile('config/photos.cfg')
 
 # Start the server for the application
 if __name__ == '__main__':
-    app.run()
+    manager.run()
