@@ -64,8 +64,13 @@ def list_dates():
 @app.route('/list_photos_by_date/<p_date>')
 def list_photos_by_date(p_date):
     app.logger.debug('Query photos for: ' + p_date)
-    cur = g.db.execute('select photo_name from tphoto order by photo_name')
-    list_photos = [dict(photo_name=row[0]) for row in cur.fetchall()]
+    cur = g.db.execute('''
+        select id, photo_name, location
+          from tphoto
+         where photo_date = ?
+         order by photo_name
+        ''', [p_date])
+    list_photos = [dict(photo_id=row[0],photo_name=row[1],location=row[2]) for row in cur.fetchall()]
     return render_template('list_photos.html', list_photos=list_photos)
 
 # Database functions

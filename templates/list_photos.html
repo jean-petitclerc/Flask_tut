@@ -4,13 +4,14 @@
     <div class="page-header">
         <h1>Liste des photos</h1>
     </div>
-    <ul>
+    <ol>
         {% for row in list_photos %}
-            <li><a href="{{ row['photo_name'] }}">{{ row['photo_name']|safe }} </a>
+            <li>{{ row['photo_name']|safe }}<img src="file://{{ row['location'] }}">
+            </li>
         {% else %}
-            <li><em>No photo in the database</em>
+            <li><em>No photo in the database</em></li>
         {% endfor %}
-    </ul>
+    </ol>
 </div>
 
 {% endblock %}
